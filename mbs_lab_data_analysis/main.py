@@ -9,18 +9,18 @@ class Strain:
         self.n = len(self.mu)
         self.color = color
 
-def get_replicates(row):
-    df = pd.read_csv('file.csv')
+def get_replicates(tag, row):
+    df = pd.read_csv(tag+'.csv')
     return df[df['Well'].str.contains(str(row))]
 
 
 def main():
     # read data
-    df = pd.read_csv('file.csv')
-
-    strain_1_data = get_replicates(10)
-    strain_2_data = get_replicates(11)
-    strain_3_data = get_replicates(8)
+    tag = 'placeholder'
+    
+    strain_1_data = get_replicates(tag, 10)
+    strain_2_data = get_replicates(tag, 11)
+    strain_3_data = get_replicates(tag, 8)
 
     # do calculations
     strain_1 = Strain(strain_1_data, color='blue')
@@ -35,18 +35,18 @@ def main():
         plt.plot(range(strain.n), strain.mu, strain.color)
         plt.fill_between(range(strain.n), strain.mu - 1*strain.std, strain.mu + 1*strain.std, alpha=0.3, color=strain.color)
         plt.fill_between(range(strain.n), strain.mu - 2*strain.std, strain.mu + 2*strain.std, alpha=0.3, color=strain.color)
-    plt.savefig('mu_&_std.png')
+    plt.savefig(f"{tag}_{'mu_&_std.png'}")
     plt.figure()
 
     # plot option 2
     for strain in strains:
         plt.plot(range(strain.n), strain.mu, strain.color)
-    plt.savefig('mu.png')
+    plt.savefig(f"{tag}_{'mu.png'}")
     plt.figure()
 
     for strain in strains:
         plt.plot(range(strain.n), strain.std, strain.color)
-    plt.savefig('std.png')
+    plt.savefig(f"{tag}_{'std.png'}")
     plt.figure()
 
 

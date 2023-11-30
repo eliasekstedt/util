@@ -49,8 +49,6 @@ def main():
     plt.savefig('std.png')
     plt.figure()
 
-    print(strain_1.mu)
-    print(strain_1.std)
 
 if __name__ == '__main__':
     main()

@@ -25,9 +25,17 @@ def get_background(tag):
 
 def main():
     # read data
+
+    ###
     tag = 'od600'
+    #tag = 'gfp'
+    ###
     
+    ###
     strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H'])
+    #strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H', 'G'])
+    ###
+
     strain_2_data = get_replicates(tag, 11, ['A', 'B', 'H'])
     strain_3_data = get_replicates(tag, 8, ['A', 'B', 'H'])
 
@@ -37,9 +45,6 @@ def main():
     strain_1 = Strain(strain_1_data, background, 'blue', 'Empty Vector')
     strain_2 = Strain(strain_2_data, background, 'red', 'Wild Type sRNA')
     strain_3 = Strain(strain_3_data, background, 'green', 'Mutated sRNA-X')
-
-
-
 
     # plot
     strains = [strain_1, strain_2, strain_3]
@@ -53,7 +58,10 @@ def main():
     plt.xlabel('Measurement')
     plt.ylabel(f'{tag.upper()}')
     plt.legend()
-    plt.savefig(f"{tag}_all_rep_{'mu_&_std.png'}")
+    ###
+    plt.savefig(f"{tag}_{'mu_&_std.png'}")
+    #plt.savefig(f"{tag}_all_rep_{'mu_&_std.png'}")
+    ###
     plt.figure()
 
     """

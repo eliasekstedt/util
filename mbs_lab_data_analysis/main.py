@@ -25,12 +25,19 @@ def get_background(tag):
 
 def main():
     # read data
+    od600 = True
+    all_rep = True
 
     ###
-    #tag = 'od600'
-    tag = 'gfp'
-    #strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H', 'G'])               # not all replicates
-    strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H'])                     # all replicates
+    if od600:
+        tag = 'od600'
+    else:
+        tag = 'gfp'
+    
+    if all_rep:
+        strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H'])
+    else:
+        strain_1_data = get_replicates(tag, 10, ['A', 'B', 'H', 'G'])
     ###
 
     strain_2_data = get_replicates(tag, 11, ['A', 'B', 'H'])
@@ -53,8 +60,10 @@ def main():
         #plt.fill_between(range(strain.n), strain.mu - 2*strain.std, strain.mu + 2*strain.std, alpha=0.3, color=strain.color)
 
     ###
-    #plt.title(f'{tag.upper()} Over Time')                                # if od600
-    plt.title(f'{tag.upper()} Fluorescence Over Time')                  # if GFP
+    if od600:
+        plt.title(f'{tag.upper()} Over Time')
+    else:
+        plt.title(f'{tag.upper()} Fluorescence Over Time')
     ###
 
     plt.xlabel('Measurement')
@@ -62,8 +71,10 @@ def main():
     plt.legend()
 
     ###
-    #plt.savefig(f"{tag}_{'mean.png'}")                                    # if not all replicates
-    plt.savefig(f"{tag}_all_rep_{'mean.png'}")                           # if all replicates
+    if all_rep:
+        plt.savefig(f"{tag}_all_rep_{'mean.png'}")
+    else:
+        plt.savefig(f"{tag}_{'mean.png'}")
     ###
 
     plt.figure()
